@@ -3,18 +3,14 @@ using UnityEngine.EventSystems;
 
 namespace Yorozu.UI
 {
-	public class RingLayoutSelector : RingLayout
+	public class RingLayoutMenu : RingLayout
 	{
-		[SerializeField]
-		private Canvas _canvas;
-
-		[SerializeField]
-		private CanvasGroup _canvasGroup;
-
+		[Header("Menu")]
 		[SerializeField]
 		[Range(0.1f, 3f)]
 		private float _transitionTime = 0.5f;
 
+		[Header("OpenCloseParam")]
 		[SerializeField]
 		[Range(0f, 720f)]
 		private float _rotateAngle = 180f;
@@ -39,20 +35,23 @@ namespace Yorozu.UI
 		{
 			base.Awake();
 			_scrollTime = 0f;
-			Open();
 		}
 
+		/// <summary>
+		/// メニューっぽく開く
+		/// </summary>
 		public void Open()
 		{
 			if (_isOpen || _isOpen != _nextState)
 				return;
 
-			_canvas.SetEnable();
-			_canvasGroup.alpha = 1f;
 			_nextState = true;
 			_time = _transitionTime;
 		}
 
+		/// <summary>
+		/// メニューっぽく閉じる
+		/// </summary>
 		public void Close()
 		{
 			if (_isOpen != _nextState || !_isOpen)
@@ -60,11 +59,6 @@ namespace Yorozu.UI
 
 			_nextState = false;
 			_time = _transitionTime;
-			_stateChangedAction = () =>
-			{
-				_canvas.SetDisable();
-				_canvasGroup.alpha = 0f;
-			};
 		}
 
 		public override void OnDrag(PointerEventData eventData)

@@ -13,7 +13,7 @@ namespace Yorozu.UI
 		private RingLayout _layout;
 
 		[SerializeField]
-		private RingLayoutSelector _menu;
+		private RingLayoutMenu _menu;
 
 		[SerializeField]
 		private GameObject _resource;
